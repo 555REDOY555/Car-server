@@ -60,6 +60,7 @@ async function run() {
           const CarsCllection = database.collection("Cars");
           const orderCollection = database.collection("order")
           const UserCollection = database.collection("users")
+          const ReviewCollection = database.collection("Review")
 
 
           // GET API 
@@ -175,6 +176,14 @@ async function run() {
                console.log('hit the post api', user);
 
                const result = await UserCollection.insertOne(user);
+               console.log(result);
+               res.json(result)
+          });
+          app.post('/Review', async (req, res) => {
+               const Review = req.body;
+               console.log('hit the post api', Review);
+
+               const result = await ReviewCollection.insertOne(Review);
                console.log(result);
                res.json(result)
           });
