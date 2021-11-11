@@ -29,21 +29,21 @@ admin.initializeApp({
 app.use(cors());
 app.use(express.json());
 
-async function verifyToken(req, res, next) {
-     if (req.headers?.authorization?.startsWith('Bearer ')) {
-          const token = req.headers.authorization.split(' ')[1];
+// async function verifyToken(req, res, next) {
+//      if (req.headers?.authorization?.startsWith('Bearer ')) {
+//           const token = req.headers.authorization.split(' ')[1];
 
-          try {
-               const decodedUser = await admin.auth().verifyIdToken(token);
-               req.decodedEmail = decodedUser.email;
-          }
-          catch {
+//           try {
+//                const decodedUser = await admin.auth().verifyIdToken(token);
+//                req.decodedEmail = decodedUser.email;
+//           }
+//           catch {
 
-          }
+//           }
 
-     }
-     next();
-}
+//      }
+//      next();
+// }
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.to6vq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
@@ -183,7 +183,7 @@ async function run() {
 
 
           //make a admin
-          app.put('/users/admin', verifyToken, async (req, res) => {
+          app.put('/users/admin', async (req, res) => {
                const user = req.body;
                const requester = req.decodedEmail;
                if (requester) {
