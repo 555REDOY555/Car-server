@@ -84,6 +84,12 @@ async function run() {
                res.send(order);
 
           })
+          app.get('/Review', async (req, res) => {
+               const cursor = ReviewCollection.find({});
+               const order = await cursor.toArray();
+               res.send(order);
+
+          })
 
           // GET Single Service   no
 
